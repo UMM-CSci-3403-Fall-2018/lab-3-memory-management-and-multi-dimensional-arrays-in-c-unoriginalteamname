@@ -4,13 +4,12 @@
 #include "array_merge.h"
 
 //check if value is in array
-bool checkValue(int value, int* arr, int size){
+bool checkValue(int num, int* arr, int size){
 	int i;
 	for(i = 0; i < size; i++){
-		if(arr[i] == value)
+		if(arr[i] == num)
 			return true;
 	}
-
 	return false;
 }
 
@@ -28,9 +27,9 @@ int* array_merge(int num_arrays, int* sizes, int** values){
 	//fill an array with unique values, count the number of unique values
 	for(i = 0; i < num_arrays; i++){
 		int x = sizes[i];
-		for(j = 0; j < x; j++){
+		for(j = 0; j <= x; j++){
 			if(checkValue(values[x][j], arr, n) == false){
-				uniqueElements++;
+				uniqueElements = uniqueElements + 1;
 				arr[count] = values[x][j];
 				count++;
 			}
@@ -38,13 +37,14 @@ int* array_merge(int num_arrays, int* sizes, int** values){
 	}
 
 	//create array of exact size, set first element to # of elements
-	int* returnArr[uniqueElements + 1];
+	int x = uniqueElements + 1;
+	int* returnArr;
+	returnArr = (int*) calloc(x,sizeof(int));
 	returnArr[0] = uniqueElements;
 
-	for(i = 1; i <= uniqueElements + 1; i++){
+	for(i = 1; i <= x; i++){
 		returnArr[i] = arr[i - 1];
 	}
 
 	return returnArr;
-
 }
