@@ -57,7 +57,6 @@ void mergesortRange(int values[], int startIndex, int endIndex) {
 	}
 }
 
-int* mergesort(int size, int values[]) {
-	mergesortRange(values, 1, size);
-	return(values);
+void mergesort(int size, int values[]) {
+	mergesortRange(values, 0, size);
 }

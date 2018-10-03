@@ -14,9 +14,16 @@ bool checkValue(int num, int* arr, int size){
 	return false;
 }
 
+void printArray(int size, int* arr) {
+	for (int i=0; i<size; ++i) {
+		printf("%d ", arr[i]);
+	}
+	printf("\n");
+}
+
 int* array_merge(int num_arrays, int* sizes, int** values){
-	int i = 0;
-	int j = 0;
+	int i;
+	int j;
 	int n = 0;
 	for(i = 0; i < num_arrays; i++){
 		n = n + sizes[i];
@@ -31,28 +38,29 @@ int* array_merge(int num_arrays, int* sizes, int** values){
 		int x = sizes[i];
 		for(j = 0; j < x; j++){
 			int check = values[i][j];
-			bool boolean = checkValue(check, arr, n);
+			bool boolean = checkValue(check, arr, count);
 			if(boolean == false){
-				uniqueElements = uniqueElements + 1;
+				uniqueElements++;
 				arr[count] = check;
 				count++;
 			}
-			//free(boolean);
 		}
 	}
 
 	//create array of exact size, set first element to # of elements
-	int y = uniqueElements + 1;
-	int *returnArr = (int *)malloc(y * sizeof(int));
+	int finalsize = uniqueElements + 1;
+	int *returnArr = (int *)malloc(finalsize * sizeof(int));
 	//int* returnArr;
 	//returnArr = (int*) calloc(x,sizeof(int));
 	returnArr[0] = uniqueElements;
+	//printf("array:");
+	//printArray(finalsize, returnArr);
 
-	for(i = 1; i < y; i++){
+	for(i = 1; i < finalsize; i++){
 		returnArr[i] = arr[i - 1];
 	}
 
-  int* result = mergesort(y, returnArr);
-	//free(returnArr)
-	return result;
+
+  mergesortRange(returnArr, 1, finalsize);
+	return returnArr;
 }
