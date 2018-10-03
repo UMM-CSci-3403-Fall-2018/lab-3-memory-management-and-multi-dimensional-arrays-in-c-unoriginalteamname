@@ -5,7 +5,7 @@
 
 #define UNIT_TESTING
 
-void mergesort(int size, int values[]);
+int* mergesort(int size, int values[]);
 
 void mergesortRange(int values[], int startIndex, int endIndex);
 

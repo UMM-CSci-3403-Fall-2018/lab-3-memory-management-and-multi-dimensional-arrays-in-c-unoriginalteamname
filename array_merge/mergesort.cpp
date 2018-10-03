@@ -44,6 +44,7 @@ void mergeRanges(int values[], int startIndex, int midPoint, int endIndex){
 		values[i + startIndex] = destination[i];
 	}
 	free(destination);
+
 }
 
 void mergesortRange(int values[], int startIndex, int endIndex) {
@@ -56,6 +57,7 @@ void mergesortRange(int values[], int startIndex, int endIndex) {
 	}
 }
 
-void mergesort(int size, int values[]) {
-	mergesortRange(values, 0, size);
+int* mergesort(int size, int values[]) {
+	mergesortRange(values, 1, size);
+	return(values);
 }

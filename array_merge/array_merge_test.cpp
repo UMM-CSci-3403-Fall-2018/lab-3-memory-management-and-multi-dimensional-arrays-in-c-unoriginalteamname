@@ -15,9 +15,10 @@ TEST(ArrayMerge, Handle_empty_list) {
   int sizes[] = { };
   int expected[] = { 0 };
   int* result;
-
+  result = (int *) calloc(0, sizeof(int));
   result = array_merge(0, sizes,  a);
   arrays_match(1, result, expected);
+  free(result);
 }
 
 TEST(ArrayMerge, Handle_singleton_list) {
