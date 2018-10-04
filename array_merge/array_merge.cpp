@@ -4,7 +4,7 @@
 #include "array_merge.h"
 #include "mergesort.cpp"
 
-//check if value is in array
+//return true if a value is in array
 bool checkValue(int num, int* arr, int size){
 	int i;
 	for(i = 0; i < size; i++){
@@ -14,6 +14,7 @@ bool checkValue(int num, int* arr, int size){
 	return false;
 }
 
+//used for testing purposes
 void printArray(int size, int* arr) {
 	for (int i=0; i<size; ++i) {
 		printf("%d ", arr[i]);
@@ -24,12 +25,13 @@ void printArray(int size, int* arr) {
 int* array_merge(int num_arrays, int* sizes, int** values){
 	int i;
 	int j;
+	//create an array large enough to hold all elements in values
 	int n = 0;
 	for(i = 0; i < num_arrays; i++){
 		n = n + sizes[i];
 	}
-
 	int arr[n];
+
 	int uniqueElements = 0;
 	int count = 0;
 
@@ -39,6 +41,8 @@ int* array_merge(int num_arrays, int* sizes, int** values){
 		for(j = 0; j < x; j++){
 			int check = values[i][j];
 			bool boolean = checkValue(check, arr, count);
+			//if the element is a unique value,
+			//add to the array in the correct index
 			if(boolean == false){
 				uniqueElements++;
 				arr[count] = check;
@@ -50,17 +54,14 @@ int* array_merge(int num_arrays, int* sizes, int** values){
 	//create array of exact size, set first element to # of elements
 	int finalsize = uniqueElements + 1;
 	int *returnArr = (int *)malloc(finalsize * sizeof(int));
-	//int* returnArr;
-	//returnArr = (int*) calloc(x,sizeof(int));
-	returnArr[0] = uniqueElements;
-	//printf("array:");
-	//printArray(finalsize, returnArr);
 
+	returnArr[0] = uniqueElements;
+	//copies the old array into one of correct size, after the first element
 	for(i = 1; i < finalsize; i++){
 		returnArr[i] = arr[i - 1];
 	}
 
-
+	//sorts the array, starting at element 1
   mergesortRange(returnArr, 1, finalsize);
 	return returnArr;
 }
